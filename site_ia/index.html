@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>MENTE IA CORE</title>
+    <link rel="stylesheet" href="/site_ia/style.css">
+</head>
+<body>
+
+<div class="app">
+    <aside class="sidebar">
+        <h1>🧠 MENTE IA</h1>
+        <p class="status">ONLINE</p>
+
+        <button onclick="abrirMemoria()">🧠 Memória</button>
+        <button>🤖 Agentes</button>
+        <button>🔧 Ferramentas</button>
+        <button>🌐 Projetos</button>
+        <button>📞 WhatsApp</button>
+        <button>💻 Código</button>
+        <button>🧪 Testes</button>
+    </aside>
+
+    <main class="main">
+        <section class="brain">
+            <div class="core">🧠</div>
+            <h2>Segundo Cérebro Ativo</h2>
+            <p>Obsidian conectado • DeepSeek ativo • Agentes prontos</p>
+        </section>
+
+        <section class="terminal">
+
+            <div class="log">SYSTEM: MENTE IA inicializada...</div>
+            <div class="log">MEMORY: Obsidian conectado...</div>
+            <div class="log">AGENT: Programmer Agent aguardando comando...</div>
+                
+            <br>
+
+            <div class="log" id="ideias">💡 Ideias: carregando...</div>
+            <div class="log" id="projetos">💻 Projetos: carregando...</div>
+            <div class="log" id="objetivos">🎯 Objetivos: carregando...</div>
+            <div class="log" id="tarefas">📋 Tarefas: carregando...</div>
+            <div class="log" id="agentes">🤖 Agentes: carregando...</div>
+            <div class="log" id="versao">Versão: carregando...</div>
+
+        </section>
+
+        <div class="input-area">
+            <input id="comando" type="text" placeholder="Digite um comando para a MENTE IA...">
+            <button onclick="enviarComando()">Enviar</button>
+        </div>
+    </main>
+</div>
+
+
+<script>
+
+fetch("/site_ia/status.json")
+.then(res => res.json())
+.then(data => {
+
+    document.getElementById("ideias").innerText =
+    "💡 Ideias: " + data.ideias;
+
+    document.getElementById("projetos").innerText =
+    "💻 Projetos: " + data.projetos;
+
+    document.getElementById("objetivos").innerText =
+    "🎯 Objetivos: " + data.objetivos;
+
+    document.getElementById("tarefas").innerText =
+    "📋 Tarefas: " + data.tarefas;
+
+    document.getElementById("agentes").innerText =
+    "🤖 Agentes: " + data.agentes;
+
+    document.getElementById("versao").innerText =
+    "Versão: " + data.versao;
+
+});
+async function enviarComando() {
+
+    const input = document.getElementById("comando");
+    const comando = input.value;
+
+    if (!comando.trim()) {
+        return;
+    }
+
+    const terminal = document.querySelector(".terminal");
+
+    terminal.innerHTML += `
+        <div class="log">Você: ${comando}</div>
+    `;
+
+    input.value = "";
+
+    const resposta = await fetch("/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            comando: comando
+        })
+    });
+
+    const data = await resposta.json();
+
+    terminal.innerHTML += `
+        <div class="log">MENTE IA:</div>
+        <pre>${data.resposta}</pre>
+    `;
+
+    terminal.scrollTop = terminal.scrollHeight;
+}
+async function atualizarDashboard() {
+
+    await fetch("/atualizar-dashboard");
+
+    location.reload();
+
+}
+async function abrirMemoria() {
+
+    await fetch("/atualizar-memoria");
+
+    const resposta = await fetch("/site_ia/memoria.json");
+    const memoria = await resposta.json();
+
+    document.querySelector(".terminal").innerHTML = `
+        <div class="log">🧠 MEMÓRIA DA MENTE IA</div>
+        <br>
+
+        <div class="log">👤 PERFIL</div>
+        <pre>${memoria.perfil}</pre>
+
+        <div class="log">🎯 OBJETIVOS</div>
+        <pre>${memoria.objetivos}</pre>
+
+        <div class="log">💻 PROJETOS</div>
+        <pre>${memoria.projetos}</pre>
+
+        <div class="log">💡 IDEIAS</div>
+        <pre>${memoria.ideias}</pre>
+    `;
+}
+</script>
+
+</body>
+</html>
