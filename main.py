@@ -18,8 +18,6 @@ from tools.file_tools import (
     listar_tarefas,
     listar_agentes,
     status_sistema,
-    salvar_cliente,
-    listar_clientes,
     status_sistema_real,
     salvar_objetivo,
     ler_objetivos,
@@ -28,6 +26,14 @@ from tools.file_tools import (
     gerar_base_roadmap,
     status_sistema
 )
+from tools.task_tools import (
+    nova_tarefa,
+    nova_tarefa_projeto,
+    listar_tarefas,
+    concluir_tarefa
+)
+from tools.project_tools import novo_projeto, listar_projetos
+from tools.client_tools import salvar_cliente, listar_clientes
 from tools.file_tools import resumir_memoria
 from tools.file_tools import salvar_obsidian
 from core.ia_router import escolher_modelo
@@ -125,6 +131,37 @@ def limpar_codigo(codigo):
 def executar_tools(comando):
 
     comando_lower = comando.lower()
+    
+    if "nova tarefa" in comando_lower and " projeto " in comando_lower:
+
+        partes = comando.split(" projeto ")
+
+        tarefa = partes[0].replace("nova tarefa", "").strip()
+        projeto = partes[1].strip()
+
+        return nova_tarefa_projeto(projeto, tarefa)
+    
+    if "nova tarefa" in comando_lower:
+
+        texto = comando.replace("nova tarefa", "").strip()
+
+        return nova_tarefa(texto)
+
+
+    if "listar tarefas" in comando_lower:
+
+        return listar_tarefas()
+    
+    if comando.startswith("novo projeto"):
+
+        nome = comando.replace("novo projeto", "").strip()
+
+        return novo_projeto(nome)
+
+
+    if comando == "listar projetos":
+
+        return listar_projetos()
     
     if "novo cliente" in comando_lower:
 

@@ -1,0 +1,15 @@
+[
+    {
+        "tarefa": "Criar landing page",
+        "status": "Pendente"
+    },
+    {
+        "tarefa": "Criar formulário projeto Site El Shaday",
+        "status": "Pendente"
+    },
+    {
+        "projeto": "site el shaday",
+        "tarefa": "criar botão whatsapp",
+        "status": "Pendente"
+    }
+]

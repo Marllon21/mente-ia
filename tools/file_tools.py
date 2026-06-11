@@ -602,36 +602,3 @@ def gerar_memoria_json():
 
     return "Memória JSON atualizada."
 from datetime import datetime
-
-def salvar_cliente(conteudo):
-
-    vault = r"C:\Users\marllon.araujo\Desktop\Nova pasta (2)\MENTE IA CORE"
-    caminho = f"{vault}\\👥 CLIENTES.md"
-
-    data = datetime.now().strftime("%d/%m/%Y")
-
-    with open(caminho, "a", encoding="utf-8") as arquivo:
-
-        arquivo.write(f"""
-
-## Cliente
-
-Data: {data}
-Status: Prospect
-
-{conteudo}
-
--------------------------
-""")
-
-    return "Cliente salvo."
-def listar_clientes():
-
-    vault = r"C:\Users\marllon.araujo\Desktop\Nova pasta (2)\MENTE IA CORE"
-    caminho = f"{vault}\\👥 CLIENTES.md"
-
-    try:
-        with open(caminho, "r", encoding="utf-8") as arquivo:
-            return arquivo.read()
-    except:
-        return "Nenhum cliente encontrado."
