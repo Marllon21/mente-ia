@@ -14,8 +14,6 @@ from tools.file_tools import (
     salvar_memoria_obsidian,
     salvar_perfil,
     ler_perfil,
-    criar_tarefa,
-    listar_tarefas,
     listar_agentes,
     status_sistema,
     status_sistema_real,
@@ -134,7 +132,7 @@ def executar_tools(comando):
     
     if "nova tarefa" in comando_lower and " projeto " in comando_lower:
 
-        partes = comando.split(" projeto ")
+        partes = comando_lower.split(" projeto ")
 
         tarefa = partes[0].replace("nova tarefa", "").strip()
         projeto = partes[1].strip()
@@ -193,12 +191,6 @@ def executar_tools(comando):
     if "listar tarefas" in comando_lower:
 
         return listar_tarefas()
-    
-    if "criar tarefa" in comando_lower:
-
-        texto = comando.replace("criar tarefa", "").strip()
-
-        return criar_tarefa(texto)
     
     if "status sistema" in comando_lower:
 
