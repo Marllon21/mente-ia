@@ -24,6 +24,7 @@ from tools.file_tools import (
     gerar_base_roadmap,
     status_sistema
 )
+
 from tools import task_tools
 
 from tools.project_tools import novo_projeto, listar_projetos
@@ -126,25 +127,36 @@ def executar_tools(comando):
 
     comando_lower = comando.lower()
     
-    if "nova tarefa" in comando_lower and " projeto " in comando_lower:
+    if "concluir tarefa" in comando_lower:
+        numero = comando_lower.replace("concluir tarefa", "").strip()
 
-        partes = comando_lower.split(" projeto ")
+        if numero.isdigit():
+            return task_tools.concluir_tarefa(int(numero))
 
-        tarefa = partes[0].replace("nova tarefa", "").strip()
+        return "Informe o número da tarefa. Exemplo: concluir tarefa 2"
+    
+    if "nova tarefa" in comando_lower and "projeto" in comando_lower:
+
+        texto_completo = comando_lower.replace("nova tarefa", "").strip()
+
+        partes = texto_completo.split("projeto", 1)
+
+        tarefa = partes[0].strip()
         projeto = partes[1].strip()
 
-        return nova_tarefa_projeto(projeto, tarefa)
-    
+        return task_tools.nova_tarefa_projeto(projeto, tarefa)
+
+
     if "nova tarefa" in comando_lower:
 
         texto = comando.replace("nova tarefa", "").strip()
 
-        return nova_tarefa(texto)
+        return task_tools.nova_tarefa(texto)
 
 
     if "listar tarefas" in comando_lower:
 
-        return listar_tarefas()
+        return task_tools.listar_tarefas()
     
     if comando.startswith("novo projeto"):
 
@@ -183,10 +195,6 @@ def executar_tools(comando):
         texto = comando.replace("salvar roadmap", "").strip()
 
         return salvar_roadmap(texto)
-    
-    if "listar tarefas" in comando_lower:
-
-        return listar_tarefas()
     
     if "status sistema" in comando_lower:
 

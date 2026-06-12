@@ -1,7 +1,8 @@
 import json
 import os
 
-ARQUIVO = "memory/tarefas.json"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ARQUIVO = os.path.join(BASE_DIR, "memory", "tarefas.json")
 
 
 def carregar_tarefas():
@@ -21,14 +22,28 @@ def nova_tarefa(texto):
     tarefas = carregar_tarefas()
 
     tarefas.append({
-    "projeto": "Sem Projeto",
-    "tarefa": texto,
-    "status": "Pendente"
-})
+        "projeto": "Sem Projeto",
+        "tarefa": texto,
+        "status": "Pendente"
+    })
 
     salvar_tarefas(tarefas)
 
     return f"Tarefa '{texto}' criada com sucesso."
+
+
+def nova_tarefa_projeto(projeto, tarefa):
+    tarefas = carregar_tarefas()
+
+    tarefas.append({
+        "projeto": projeto,
+        "tarefa": tarefa,
+        "status": "Pendente"
+    })
+
+    salvar_tarefas(tarefas)
+
+    return f"Tarefa '{tarefa}' criada para o projeto '{projeto}'."
 
 
 def listar_tarefas():
@@ -41,29 +56,27 @@ def listar_tarefas():
 
     for i, tarefa in enumerate(tarefas, start=1):
         projeto = tarefa.get("projeto", "Sem Projeto")
-        nome_tarefa = tarefa.get("tarefa", "")
+        nome = tarefa.get("tarefa", "")
         status = tarefa.get("status", "Pendente")
 
-        resultado += f"{i}. [{projeto}] {nome_tarefa} [{status}]\n"
+        resultado += f"{i}. Projeto: {projeto} | {nome} | Status: {status}\n"
 
     return resultado
 
+
 def concluir_tarefa(numero):
     tarefas = carregar_tarefas()
-
     indice = numero - 1
 
     if indice < 0 or indice >= len(tarefas):
         return "Tarefa não encontrada."
 
     tarefas[indice]["status"] = "Concluída"
-
     salvar_tarefas(tarefas)
 
     return "Tarefa concluída com sucesso."
 
 def nova_tarefa_projeto(projeto, tarefa):
-
     tarefas = carregar_tarefas()
 
     tarefas.append({
@@ -75,4 +88,22 @@ def nova_tarefa_projeto(projeto, tarefa):
     salvar_tarefas(tarefas)
 
     return f"Tarefa '{tarefa}' criada para o projeto '{projeto}'."
+
+def dashboard():
+    tarefas = carregar_tarefas()
+
+    total = len(tarefas)
+    concluidas = len([t for t in tarefas if t["status"] == "Concluída"])
+    pendentes = total - concluidas
+
+    return f"""
+📊 DASHBOARD
+
+Total de tarefas: {total}
+✅ Concluídas: {concluidas}
+⏳ Pendentes: {pendentes}
+
+Progresso: {(concluidas / total * 100) if total > 0 else 0:.0f}%
+"""
+
 

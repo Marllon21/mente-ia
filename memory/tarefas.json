@@ -1,15 +1,22 @@
 [
     {
+        "projeto": "site el shaday",
         "tarefa": "Criar landing page",
         "status": "Pendente"
     },
     {
-        "tarefa": "Criar formulário projeto Site El Shaday",
+        "projeto": "site el shaday",
+        "tarefa": "Criar formulário de orçamento",
+        "status": "Concluída"
+    },
+    {
+        "projeto": "site el shaday",
+        "tarefa": "Criar botão WhatsApp",
         "status": "Pendente"
     },
     {
         "projeto": "site el shaday",
-        "tarefa": "criar botão whatsapp",
+        "tarefa": "criar seção serviços",
         "status": "Pendente"
     }
 ]
