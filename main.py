@@ -24,12 +24,8 @@ from tools.file_tools import (
     gerar_base_roadmap,
     status_sistema
 )
-from tools.task_tools import (
-    nova_tarefa,
-    nova_tarefa_projeto,
-    listar_tarefas,
-    concluir_tarefa
-)
+from tools import task_tools
+
 from tools.project_tools import novo_projeto, listar_projetos
 from tools.client_tools import salvar_cliente, listar_clientes
 from tools.file_tools import resumir_memoria
