@@ -1,7 +1,6 @@
 import os
 import json
 from tools.file_tools import (
-    criar_tarefa,
     listar_agentes,
     salvar_ideia,
     salvar_projeto,
@@ -24,7 +23,12 @@ from tools.file_tools import (
     gerar_base_roadmap,
     status_sistema
 )
-
+from tools.link_tools import (
+    vincular_cliente_projeto,
+    projetos_cliente,
+)
+from tools.project_context import gerar_contexto_projeto, salvar_contexto_projeto
+from tools.project_dashboard import mostrar_projeto
 from tools import task_tools
 
 from tools.project_tools import novo_projeto, listar_projetos
@@ -127,6 +131,58 @@ def executar_tools(comando):
 
     comando_lower = comando.lower()
     
+    if "vincular cliente" in comando_lower:
+
+        partes = comando_lower.replace(
+            "vincular cliente",
+            ""
+        ).split("projeto")
+
+        cliente = partes[0].strip()
+
+        projeto = partes[1].strip()
+
+        return vincular_cliente_projeto(
+            cliente,
+            projeto
+        )
+        
+    if "mostrar cliente" in comando_lower:
+
+        nome = comando_lower.replace(
+            "mostrar cliente",
+            ""
+        ).strip()
+
+        return projetos_cliente(nome)
+    
+    if "salvar contexto projeto" in comando_lower:
+
+        nome = comando_lower.replace(
+            "salvar contexto projeto",
+            ""
+        ).strip()
+
+        return salvar_contexto_projeto(nome)
+    
+    if "gerar contexto projeto" in comando_lower:
+
+        nome = comando_lower.replace(
+            "gerar contexto projeto",
+            ""
+        ).strip()
+
+        return gerar_contexto_projeto(nome)
+        
+    if "mostrar projeto" in comando_lower:
+
+        nome = comando_lower.replace(
+            "mostrar projeto",
+            ""
+        ).strip()
+
+        return mostrar_projeto(nome)
+    
     if "concluir tarefa" in comando_lower:
         numero = comando_lower.replace("concluir tarefa", "").strip()
 
@@ -157,6 +213,9 @@ def executar_tools(comando):
     if "listar tarefas" in comando_lower:
 
         return task_tools.listar_tarefas()
+    
+    if "dashboard" in comando_lower:
+        return task_tools.dashboard()
     
     if comando.startswith("novo projeto"):
 
