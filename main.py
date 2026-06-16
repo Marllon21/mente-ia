@@ -23,9 +23,13 @@ from tools.file_tools import (
     gerar_base_roadmap,
     status_sistema
 )
+from tools.objective_tools import (
+    novo_objetivo,
+    buscar_objetivo
+)
 from tools.link_tools import (
     vincular_cliente_projeto,
-    projetos_cliente,
+    projetos_cliente
 )
 from tools.project_context import gerar_contexto_projeto, salvar_contexto_projeto
 from tools.project_dashboard import mostrar_projeto
@@ -130,6 +134,25 @@ def limpar_codigo(codigo):
 def executar_tools(comando):
 
     comando_lower = comando.lower()
+    
+    if "novo objetivo projeto" in comando_lower:
+
+        texto = comando.replace(
+            "novo objetivo projeto",
+            ""
+        ).strip()
+
+        projeto = "site el shaday"
+
+        objetivo = texto.replace(
+            projeto,
+            ""
+        ).strip()
+
+        return novo_objetivo(
+            projeto,
+            objetivo
+        )
     
     if "vincular cliente" in comando_lower:
 
