@@ -23,6 +23,17 @@ from tools.file_tools import (
     gerar_base_roadmap,
     status_sistema
 )
+from tools.project_memory import (
+    mostrar_memoria_projeto
+)
+from tools.note_tools import (
+    nova_nota,
+    mostrar_notas
+)
+
+from tools.roadmap_tools import (
+    gerar_roadmap
+)
 from tools.objective_tools import (
     novo_objetivo,
     buscar_objetivo
@@ -135,23 +146,50 @@ def executar_tools(comando):
 
     comando_lower = comando.lower()
     
-    if "novo objetivo projeto" in comando_lower:
+    if "mostrar memoria projeto" in comando_lower:
+
+        nome = comando_lower.replace(
+            "mostrar memoria projeto",
+            ""
+        ).strip()
+
+        return mostrar_memoria_projeto(nome)
+        
+    if "gerar roadmap projeto" in comando_lower:
+
+        nome = comando_lower.replace(
+            "gerar roadmap projeto",
+            ""
+        ).strip()
+
+        return gerar_roadmap(nome)
+    
+    if "mostrar notas projeto" in comando_lower:
+
+        nome = comando_lower.replace(
+            "mostrar notas projeto",
+            ""
+        ).strip()
+
+        return mostrar_notas(nome)
+    
+    if "nova nota projeto" in comando_lower:
 
         texto = comando.replace(
-            "novo objetivo projeto",
+            "nova nota projeto",
             ""
         ).strip()
 
         projeto = "site el shaday"
 
-        objetivo = texto.replace(
+        nota = texto.replace(
             projeto,
             ""
         ).strip()
 
-        return novo_objetivo(
+        return nova_nota(
             projeto,
-            objetivo
+            nota
         )
     
     if "vincular cliente" in comando_lower:
