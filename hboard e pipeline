@@ -1,0 +1,170 @@
+[1mdiff --git a/crm/lead_manager.py b/crm/lead_manager.py[m
+[1mindex 0896436..3a87849 100644[m
+[1m--- a/crm/lead_manager.py[m
+[1m+++ b/crm/lead_manager.py[m
+[36m@@ -1,2 +1,162 @@[m
+[31m-def modulo():[m
+[31m-    return "CRM em desenvolvimento"[m
+\ No newline at end of file[m
+[32m+[m[32mimport json[m
+[32m+[m[32mimport os[m
+[32m+[m
+[32m+[m[32mfrom tools.client_tools import salvar_cliente[m
+[32m+[m[32mfrom tools.project_tools import novo_projeto[m
+[32m+[m
+[32m+[m[32mBASE_DIR = os.path.dirname([m
+[32m+[m[32m    os.path.dirname([m
+[32m+[m[32m        os.path.abspath(__file__)[m
+[32m+[m[32m    )[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32mARQUIVO = os.path.join([m
+[32m+[m[32m    BASE_DIR,[m
+[32m+[m[32m    "crm_data",[m
+[32m+[m[32m    "leads.json"[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m
+[32m+[m[32mdef carregar_leads():[m
+[32m+[m
+[32m+[m[32m    if not os.path.exists(ARQUIVO):[m
+[32m+[m[32m        return [][m
+[32m+[m
+[32m+[m[32m    with open([m
+[32m+[m[32m        ARQUIVO,[m
+[32m+[m[32m        "r",[m
+[32m+[m[32m        encoding="utf-8"[m
+[32m+[m[32m    ) as arquivo:[m
+[32m+[m
+[32m+[m[32m        return json.load(arquivo)[m
+[32m+[m
+[32m+[m
+[32m+[m[32mdef salvar_leads(leads):[m
+[32m+[m
+[32m+[m[32m    with open([m
+[32m+[m[32m        ARQUIVO,[m
+[32m+[m[32m        "w",[m
+[32m+[m[32m        encoding="utf-8"[m
+[32m+[m[32m    ) as arquivo:[m
+[32m+[m
+[32m+[m[32m        json.dump([m
+[32m+[m[32m            leads,[m
+[32m+[m[32m            arquivo,[m
+[32m+[m[32m            indent=4,[m
+[32m+[m[32m            ensure_ascii=False[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m
+[32m+[m[32mdef novo_lead(nome):[m
+[32m+[m
+[32m+[m[32m    leads = carregar_leads()[m
+[32m+[m
+[32m+[m[32m    leads.append({[m
+[32m+[m
+[32m+[m[32m        "nome": nome,[m
+[32m+[m
+[32m+[m[32m        "status": "Novo"[m
+[32m+[m
+[32m+[m[32m    })[m
+[32m+[m
+[32m+[m[32m    salvar_leads(leads)[m
+[32m+[m
+[32m+[m[32m    return f"Lead '{nome}' criado."[m
+[32m+[m
+[32m+[m[32mdef listar_leads():[m
+[32m+[m
+[32m+[m[32m    leads = carregar_leads()[m
+[32m+[m
+[32m+[m[32m    if not leads:[m
+[32m+[m[32m        return "Nenhum lead encontrado."[m
+[32m+[m
+[32m+[m[32m    resultado = "\n📞 LEADS\n\n"[m
+[32m+[m
+[32m+[m[32m    for i, lead in enumerate([m
+[32m+[m[32m        leads,[m
+[32m+[m[32m        start=1[m
+[32m+[m[32m    ):[m
+[32m+[m
+[32m+[m[32m        resultado += ([m
+[32m+[m[32m            f"{i}. "[m
+[32m+[m[32m            f"{lead['nome']} "[m
+[32m+[m[32m            f"[{lead['status']}]\n"[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m    return resultado[m
+[32m+[m
+[32m+[m[32mdef mostrar_lead(nome):[m
+[32m+[m
+[32m+[m[32m    leads = carregar_leads()[m
+[32m+[m
+[32m+[m[32m    for lead in leads:[m
+[32m+[m
+[32m+[m[32m        if lead["nome"].lower() == nome.lower():[m
+[32m+[m
+[32m+[m[32m            return ([m
+[32m+[m[32m                f"\n👤 LEAD\n\n"[m
+[32m+[m[32m                f"Nome: {lead['nome']}\n"[m
+[32m+[m[32m                f"Status: {lead['status']}\n"[m
+[32m+[m[32m                f"Tipo Projeto: {lead.get('tipo_projeto','-')}\n"[m
+[32m+[m[32m                f"Orçamento: {lead.get('orcamento','-')}\n"[m
+[32m+[m[32m                f"Prazo: {lead.get('prazo','-')}"[m
+[32m+[m[32m            )[m
+[32m+[m
+[32m+[m[32m    return "Lead não encontrado."[m
+[32m+[m
+[32m+[m[32mdef qualificar_lead([m
+[32m+[m[32m    nome,[m
+[32m+[m[32m    tipo_projeto,[m
+[32m+[m[32m    orcamento,[m
+[32m+[m[32m    prazo[m
+[32m+[m[32m):[m
+[32m+[m
+[32m+[m[32m    leads = carregar_leads()[m
+[32m+[m
+[32m+[m[32m    for lead in leads:[m
+[32m+[m
+[32m+[m[32m        if lead["nome"].lower() == nome.lower():[m
+[32m+[m
+[32m+[m[32m            lead["status"] = "Qualificado"[m
+[32m+[m[32m            lead["tipo_projeto"] = tipo_projeto[m
+[32m+[m[32m            lead["orcamento"] = orcamento[m
+[32m+[m[32m            lead["prazo"] = prazo[m
+[32m+[m
+[32m+[m[32m            salvar_leads(leads)[m
+[32m+[m
+[32m+[m[32m            return ([m
+[32m+[m[32m                f"Lead '{nome}' qualificado."[m
+[32m+[m[32m            )[m
+[32m+[m
+[32m+[m[32m    return "Lead não encontrado."[m
+[32m+[m
+[32m+[m[32mdef converter_lead(nome):[m
+[32m+[m
+[32m+[m[32m    leads = carregar_leads()[m
+[32m+[m
+[32m+[m[32m    for lead in leads:[m
+[32m+[m
+[32m+[m[32m        if lead["nome"].lower() == nome.lower():[m
+[32m+[m
+[32m+[m[32m            projeto = ([m
+[32m+[m[32m                f"{lead['tipo_projeto']} - "[m
+[32m+[m[32m                f"{lead['nome']}"[m
+[32m+[m[32m            )[m
+[32m+[m
+[32m+[m[32m            salvar_cliente([m
+[32m+[m[32m                f"Nome: {lead['nome']}"[m
+[32m+[m[32m            )[m
+[32m+[m
+[32m+[m[32m            novo_projeto(projeto)[m
+[32m+[m
+[32m+[m[32m            lead["status"] = "Convertido"[m
+[32m+[m
+[32m+[m[32m            salvar_leads(leads)[m
+[32m+[m
+[32m+[m[32m            return ([m
+[32m+[m[32m                f"✅ Lead convertido\n"[m
+[32m+[m[32m                f"👤 Cliente criado\n"[m
+[32m+[m[32m                f"📁 Projeto criado: {projeto}"[m
+[32m+[m[32m            )[m
+[32m+[m
+[32m+[m[32m    return "Lead não encontrado."[m

@@ -1,0 +1,35 @@
+[
+    {
+        "nome": "João da Silva",
+        "status": "Convertido",
+        "tipo_projeto": "Site Institucional",
+        "orcamento": "3000",
+        "prazo": "30 dias"
+    },
+    {
+        "nome": "Mercado Central",
+        "status": "Novo"
+    },
+    {
+        "nome": "João da Silva",
+        "status": "Novo"
+    },
+    {
+        "nome": "Maria Silva",
+        "status": "Convertido",
+        "tipo_projeto": "Landing Page",
+        "orcamento": "2500",
+        "prazo": "20 dias"
+    },
+    {
+        "nome": "Pedro",
+        "status": "Qualificado",
+        "tipo_projeto": "Site",
+        "orcamento": "3000",
+        "prazo": "30 dias"
+    },
+    {
+        "nome": "Maria",
+        "status": "Novo"
+    }
+]

@@ -89,49 +89,4 @@ def nova_tarefa_projeto(projeto, tarefa):
 
     return f"Tarefa '{tarefa}' criada para o projeto '{projeto}'."
 
-def dashboard():
-    tarefas = carregar_tarefas()
-
-    total = len(tarefas)
-    concluidas = len([t for t in tarefas if t["status"] == "Concluída"])
-    pendentes = total - concluidas
-
-    return f"""
-📊 DASHBOARD
-
-Total de tarefas: {total}
-✅ Concluídas: {concluidas}
-⏳ Pendentes: {pendentes}
-
-Progresso: {(concluidas / total * 100) if total > 0 else 0:.0f}%
-"""
-def dashboard():
-
-    tarefas = carregar_tarefas()
-
-    total = len(tarefas)
-
-    concluidas = len(
-        [t for t in tarefas if t["status"] == "Concluída"]
-    )
-
-    pendentes = total - concluidas
-
-    progresso = 0
-
-    if total > 0:
-        progresso = round((concluidas / total) * 100)
-
-    return f"""
-📊 DASHBOARD
-
-Total de tarefas: {total}
-
-✅ Concluídas: {concluidas}
-
-⏳ Pendentes: {pendentes}
-
-🚀 Progresso: {progresso}%
-"""
-
 

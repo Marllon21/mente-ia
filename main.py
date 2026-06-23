@@ -23,6 +23,18 @@ from tools.file_tools import (
     gerar_base_roadmap,
     status_sistema
 )
+from crm.pipeline import mostrar_pipeline
+from tools.dashboard_tools import dashboard
+from crm.proposta_generator import (
+    gerar_proposta
+)
+from crm.lead_manager import (
+    novo_lead,
+    listar_leads,
+    mostrar_lead,
+    converter_lead,
+    qualificar_lead
+)
 from tools.project_memory import (
     mostrar_memoria_projeto
 )
@@ -145,6 +157,68 @@ def limpar_codigo(codigo):
 def executar_tools(comando):
 
     comando_lower = comando.lower()
+    
+    if comando_lower == "pipeline":
+        return mostrar_pipeline()
+    
+    if comando_lower == "dashboard":
+        return dashboard()
+    
+    if "converter lead" in comando_lower:
+
+        nome = comando.replace(
+            "converter lead",
+            ""
+        ).strip()
+
+        return converter_lead(nome)
+    
+    if "gerar proposta" in comando_lower:
+
+        nome = comando.replace(
+            "gerar proposta",
+            ""
+        ).strip()
+
+        return gerar_proposta(nome)
+    
+    if "qualificar lead" in comando_lower:
+
+        partes = comando.split("|")
+
+        nome = partes[1].strip()
+        tipo = partes[2].strip()
+        orcamento = partes[3].strip()
+        prazo = partes[4].strip()
+
+        return qualificar_lead(
+            nome,
+            tipo,
+            orcamento,
+            prazo
+        )
+        
+    if "mostrar lead" in comando_lower:
+
+        nome = comando.replace(
+            "mostrar lead",
+            ""
+        ).strip()
+
+        return mostrar_lead(nome)
+    
+    if "listar leads" in comando_lower:
+
+        return listar_leads()
+    
+    if "novo lead" in comando_lower:
+
+        nome = comando.replace(
+            "novo lead",
+            ""
+        ).strip()
+
+        return novo_lead(nome)
     
     if "mostrar memoria projeto" in comando_lower:
 
@@ -274,9 +348,6 @@ def executar_tools(comando):
     if "listar tarefas" in comando_lower:
 
         return task_tools.listar_tarefas()
-    
-    if "dashboard" in comando_lower:
-        return task_tools.dashboard()
     
     if comando.startswith("novo projeto"):
 
