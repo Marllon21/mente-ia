@@ -1,1 +1,8 @@
 flask
+openai
+python-dotenv
+rich
+speechrecognition
+edge-tts
+asyncio
+PyAudio

@@ -72,6 +72,7 @@ from memory.memory_manager import (
     adicionar_memoria,
     ultimas_memorias
 )
+from tools.voice_manager import speak, listen
 
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -346,13 +347,17 @@ def cerebro(comando):
 if __name__ == "__main__":
 
     print("[bold green]MENTE IA ONLINE[/bold green]")
+    speak("Olá, eu sou a Mente IA. Como posso ajudar?")
 
     while True:
-        comando = input("\nVocê: ")
+        comando = listen()
 
         if comando.lower() == "sair":
+            speak("Sistema encerrado.")
             print("[red]Sistema encerrado.[/red]")
             break
-
-        resposta = cerebro(comando)
-        print(f"\n[cyan]MENTE IA:[/cyan]\n{resposta}")
+        
+        if comando:
+            resposta = cerebro(comando)
+            print(f"\n[cyan]MENTE IA:[/cyan]\n{resposta}")
+            speak(resposta)
