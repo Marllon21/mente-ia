@@ -1,0 +1,834 @@
+[
+    {
+        "type": "function",
+        "function": {
+            "name": "mostrar_memoria_projeto",
+            "description": "Mostra a memória de um projeto específico.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do projeto."
+                    }
+                },
+                "required": ["nome"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "gerar_roadmap",
+            "description": "Gera um roadmap para um projeto específico.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do projeto."
+                    }
+                },
+                "required": ["nome"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "mostrar_notas",
+            "description": "Mostra as notas de um projeto específico.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do projeto."
+                    }
+                },
+                "required": ["nome"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "nova_nota",
+            "description": "Cria uma nova nota para um projeto específico.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "projeto": {
+                        "type": "string",
+                        "description": "O nome do projeto ao qual a nota pertence."
+                    },
+                    "nota": {
+                        "type": "string",
+                        "description": "O conteúdo da nova nota."
+                    }
+                },
+                "required": ["projeto", "nota"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "vincular_cliente_projeto",
+            "description": "Vincula um cliente a um projeto.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "cliente": {
+                        "type": "string",
+                        "description": "O nome do cliente."
+                    },
+                    "projeto": {
+                        "type": "string",
+                        "description": "O nome do projeto."
+                    }
+                },
+                "required": ["cliente", "projeto"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "projetos_cliente",
+            "description": "Lista os projetos de um cliente específico.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do cliente."
+                    }
+                },
+                "required": ["nome"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "salvar_contexto_projeto",
+            "description": "Salva o contexto de um projeto.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do projeto."
+                    }
+                },
+                "required": ["nome"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "gerar_contexto_projeto",
+            "description": "Gera o contexto de um projeto.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do projeto."
+                    }
+                },
+                "required": ["nome"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "mostrar_projeto",
+            "description": "Mostra os detalhes de um projeto específico.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do projeto."
+                    }
+                },
+                "required": ["nome"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "concluir_tarefa",
+            "description": "Conclui uma tarefa pelo seu número de identificação.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "numero": {
+                        "type": "integer",
+                        "description": "O número da tarefa a ser concluída."
+                    }
+                },
+                "required": ["numero"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "nova_tarefa_projeto",
+            "description": "Cria uma nova tarefa para um projeto específico.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "projeto": {
+                        "type": "string",
+                        "description": "O nome do projeto ao qual a tarefa pertence."
+                    },
+                    "tarefa": {
+                        "type": "string",
+                        "description": "A descrição da nova tarefa."
+                    }
+                },
+                "required": ["projeto", "tarefa"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "nova_tarefa",
+            "description": "Cria uma nova tarefa sem vinculação a um projeto.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "texto": {
+                        "type": "string",
+                        "description": "A descrição da nova tarefa."
+                    }
+                },
+                "required": ["texto"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "listar_tarefas",
+            "description": "Lista todas as tarefas existentes.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "dashboard",
+            "description": "Mostra o dashboard de tarefas.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "novo_projeto",
+            "description": "Cria um novo projeto.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do novo projeto."
+                    }
+                },
+                "required": ["nome"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "listar_projetos",
+            "description": "Lista todos os projetos existentes.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "salvar_cliente",
+            "description": "Salva um novo cliente.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "texto": {
+                        "type": "string",
+                        "description": "As informações do cliente a serem salvas."
+                    }
+                },
+                "required": ["texto"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "listar_clientes",
+            "description": "Lista todos os clientes existentes.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "gerar_status_json",
+            "description": "Gera um JSON com o status atual do sistema.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "status_sistema_real",
+            "description": "Mostra o status real do sistema.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "ler_roadmap",
+            "description": "Lê o roadmap atual.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "salvar_roadmap",
+            "description": "Salva um novo roadmap.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "texto": {
+                        "type": "string",
+                        "description": "O conteúdo do roadmap a ser salvo."
+                    }
+                },
+                "required": ["texto"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "status_sistema",
+            "description": "Mostra o status geral do sistema.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "listar_agentes",
+            "description": "Lista os agentes disponíveis no sistema.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "salvar_objetivo",
+            "description": "Salva um novo objetivo.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "texto": {
+                        "type": "string",
+                        "description": "O conteúdo do objetivo a ser salvo."
+                    }
+                },
+                "required": ["texto"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "ler_objetivos",
+            "description": "Lê os objetivos atuais.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "ler_perfil",
+            "description": "Lê o perfil do usuário.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "salvar_perfil",
+            "description": "Salva o perfil do usuário.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "texto": {
+                        "type": "string",
+                        "description": "O conteúdo do perfil a ser salvo."
+                    }
+                },
+                "required": ["texto"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "salvar_memoria_obsidian",
+            "description": "Salva uma memória no Obsidian.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "texto": {
+                        "type": "string",
+                        "description": "O conteúdo da memória a ser salva."
+                    }
+                },
+                "required": ["texto"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "resumir_memoria",
+            "description": "Resume a memória do sistema.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "ler_projetos",
+            "description": "Lê os projetos existentes.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "ler_aprendizados",
+            "description": "Lê os aprendizados existentes.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "ler_ideias",
+            "description": "Lê as ideias existentes.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "auto_corrigir",
+            "description": "Tenta corrigir um arquivo Python com base em erros. Se nenhum nome for fornecido, tenta corrigir 'gerado.py'.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do arquivo Python a ser corrigido (ex: 'meu_script.py')."
+                    }
+                }
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "quem_sou_eu",
+            "description": "Responde perguntas sobre o perfil do usuário com base nas informações salvas.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "gerar_roadmap_ia",
+            "description": "Cria um roadmap prático para a MENTE IA usando dados existentes.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "salvar_obsidian_nota",
+            "description": "Salva uma nova nota no Obsidian com um título e conteúdo.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome_nota": {
+                        "type": "string",
+                        "description": "O título da nota."
+                    },
+                    "conteudo": {
+                        "type": "string",
+                        "description": "O conteúdo da nota."
+                    }
+                },
+                "required": ["nome_nota", "conteudo"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "buscar_obsidian",
+            "description": "Busca um termo nos arquivos do Obsidian.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "termo": {
+                        "type": "string",
+                        "description": "O termo a ser buscado."
+                    }
+                },
+                "required": ["termo"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "o_que_voce_sabe_sobre",
+            "description": "Responde o que a IA sabe sobre um determinado termo com base em sua memória.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "termo": {
+                        "type": "string",
+                        "description": "O termo sobre o qual se deseja saber."
+                    }
+                },
+                "required": ["termo"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "criar_arquivo",
+            "description": "Cria um novo arquivo com um nome e conteúdo especificados. Se nenhum nome for fornecido, cria 'teste.py'.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do arquivo a ser criado (ex: 'meu_script.py')."
+                    },
+                    "conteudo": {
+                        "type": "string",
+                        "description": "O conteúdo do arquivo."
+                    }
+                }
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "ler_arquivo",
+            "description": "Lê o conteúdo de um arquivo.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do arquivo a ser lido."
+                    }
+                },
+                "required": ["nome"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "editar_arquivo",
+            "description": "Edita o conteúdo de um arquivo. Por padrão, edita 'teste.py' com um conteúdo fixo.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do arquivo a ser editado (ex: 'meu_script.py')."
+                    },
+                    "novo_conteudo": {
+                        "type": "string",
+                        "description": "O novo conteúdo para o arquivo."
+                    }
+                }
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "criar_pasta",
+            "description": "Cria uma nova pasta. Por padrão, cria 'nova_pasta'.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome da pasta a ser criada."
+                    }
+                }
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "deletar_arquivo",
+            "description": "Deleta um arquivo. Por padrão, deleta 'teste.py'.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do arquivo a ser deletado."
+                    }
+                }
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "executar_python",
+            "description": "Executa um arquivo Python. Por padrão, executa 'teste.py'.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do arquivo Python a ser executado."
+                    }
+                }
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "executar_terminal",
+            "description": "Executa um comando no terminal.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "comando": {
+                        "type": "string",
+                        "description": "O comando a ser executado no terminal."
+                    }
+                },
+                "required": ["comando"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "criar_api_flask",
+            "description": "Cria um arquivo 'app.py' com uma API Flask básica.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "criar_site",
+            "description": "Cria um site HTML/CSS básico. Pode especificar um tema.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "tema": {
+                        "type": "string",
+                        "description": "O tema do site a ser criado (ex: 'site moderno')."
+                    }
+                }
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "criar_projeto_python",
+            "description": "Cria a estrutura de um novo projeto Python com pastas e arquivos básicos.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do novo projeto Python."
+                    }
+                },
+                "required": ["nome"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "corrigir_erro",
+            "description": "Analisa um erro Python de 'logs_erro.txt' e explica como corrigi-lo.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "gerar_frontend_login",
+            "description": "Gera um arquivo 'login.html' com um frontend de login básico.",
+            "parameters": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "gerar_codigo",
+            "description": "Gera código Python com base em um pedido. Salva em 'gerado.py' e tenta executar, a menos que seja Flask/API.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "pedido": {
+                        "type": "string",
+                        "description": "A descrição do código Python a ser gerado."
+                    }
+                },
+                "required": ["pedido"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "salvar_ideia",
+            "description": "Salva uma nova ideia.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "texto": {
+                        "type": "string",
+                        "description": "O conteúdo da ideia a ser salva."
+                    }
+                },
+                "required": ["texto"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "salvar_projeto",
+            "description": "Salva um novo projeto.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "texto": {
+                        "type": "string",
+                        "description": "O conteúdo do projeto a ser salvo."
+                    }
+                },
+                "required": ["texto"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "salvar_aprendizado",
+            "description": "Salva um novo aprendizado.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "texto": {
+                        "type": "string",
+                        "description": "O conteúdo do aprendizado a ser salvo."
+                    }
+                },
+                "required": ["texto"]
+            }
+        }
+    }
+]

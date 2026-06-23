@@ -1,6 +1,46 @@
 import os
 import subprocess
+import os
 
+from main import chamar_ia, limpar_codigo, executar_python, ler_arquivo, editar_arquivo # Importar aqui para evitar circular dependency
+
+def auto_corrigir(nome):
+    if nome == "":
+        nome = "gerado.py"
+
+    resultado = executar_python(nome)
+
+    if "ERRO AO EXECUTAR" not in resultado:
+        return f"Arquivo {nome} executou sem erros:\n{resultado}"
+
+    erro = ler_arquivo("logs_erro.txt")
+    codigo_atual = ler_arquivo(nome)
+
+    prompt = f"""
+Corrija este código Python com base no erro.
+
+Retorne APENAS o código corrigido, sem explicação.
+
+ERRO:
+{erro}
+
+CÓDIGO ATUAL:
+{codigo_atual}
+"""
+
+    codigo_corrigido = limpar_codigo(chamar_ia(prompt))
+
+    editar_arquivo(nome, codigo_corrigido)
+
+    novo_resultado = executar_python(nome)
+
+    return f"""
+Arquivo {nome} corrigido.
+
+RESULTADO APÓS CORREÇÃO:
+
+{novo_resultado}
+"""
 
 def criar_arquivo(nome, conteudo):
 
@@ -420,6 +460,75 @@ PERFIL:
 VERSÃO:
 MENTE IA CORE v0.3
 """
+def criar_site(tema):
+    if tema == "":
+        tema = "site moderno"
+
+    criar_pasta("site_ia")
+
+    html = f"""
+<!DOCTYPE html>
+<html lang=\"pt-BR\">
+<head>
+    <meta charset=\"UTF-8\">
+    <title>{tema}</title>
+    <link rel=\"stylesheet\" href=\"style.css\">
+</head>
+<body>
+    <h1>{tema}</h1>
+    <p>Site criado automaticamente pela Mente IA.</p>
+</body>
+</html>
+"""
+
+    css = """
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    color: #00ffcc;
+}
+"""
+
+    criar_arquivo("site_ia/index.html", html)
+    criar_arquivo("site_ia/style.css", css)
+
+    return "Site HTML criado com sucesso."
+
+def gerar_codigo(pedido):
+    prompt = f"""
+Crie apenas código Python.
+
+Pedido:
+{pedido}
+
+Não explique nada.
+Retorne apenas o código.
+"""
+
+    codigo = limpar_codigo(chamar_ia(prompt))
+    criar_arquivo("gerado.py", codigo)
+
+    pedido_lower = pedido.lower()
+
+    if "flask" in pedido_lower or " api " in f" {pedido_lower} ":
+        return """
+CÓDIGO GERADO EM gerado.py.
+
+Como é Flask/API, não executei automaticamente para não travar.
+
+Para rodar:
+python gerado.py
+"""
+
+    resultado = executar_python("gerado.py")
+    return resultado
+
 def criar_tarefa(conteudo):
 
     vault = r"C:\Users\marllon.araujo\Desktop\Nova pasta (2)\MENTE IA CORE"
@@ -602,3 +711,57 @@ def gerar_memoria_json():
 
     return "Memória JSON atualizada."
 from datetime import datetime
+
+def criar_api_flask():
+    codigo = '''
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return {"mensagem": "API ONLINE"}
+
+app.run(debug=True)
+'''
+
+    criar_arquivo("app.py", codigo)
+
+    return "API Flask criada com sucesso."
+
+def corrigir_erro():
+    erro = ler_arquivo("logs_erro.txt")
+
+    prompt = f"""
+Analise esse erro Python e explique como corrigir:
+
+{erro}
+"""
+
+    return chamar_ia(prompt)
+
+def gerar_frontend_login():
+    html = """
+        <!DOCTYPE html>
+        <html lang=\"pt-BR\">
+        <head>
+            <meta charset=\"UTF-8\">
+            <title>Login MENTE IA</title>
+        </head>
+        <body>
+            <h2>Login</h2>
+
+            <form id=\"loginForm\">
+                <input type=\"text\" id=\"username\" placeholder=\"Usuário\" required>
+                <input type=\"password\" id=\"password\" placeholder=\"Senha\" required>
+                <button type=\"submit\">Entrar</button>
+            </form>
+
+            <p id=\"mensagem\"></p>
+        </body>
+        </html>
+        """
+
+    criar_arquivo("login.html", html)
+
+    return "Frontend de login criado em login.html"
